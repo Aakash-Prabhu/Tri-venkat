@@ -1,0 +1,67 @@
+Logistic Regression Model for Customer Purchase Prediction
+
+Overview:
+
+This project is a logistic regression model designed to predict whether a customer will buy a product based on their age and salary. The model achieves an accuracy of approximately 80%.
+
+Dataset:
+
+The dataset used for training and testing is sales_dataset.csv. It consists of customer data with features representing:
+
+Age
+
+Salary
+
+Purchase Decision (1 for purchase, 0 for no purchase)
+
+Requirements:
+
+To run this project, you need the following dependencies installed:
+
+Python 3.x
+
+Pandas
+
+NumPy
+
+Scikit-learn
+
+You can install them using:
+
+pip install pandas numpy scikit-learn
+
+How to Run:
+
+Ensure that sales_dataset.csv is in the same directory as the script.
+
+Enter the new customer details (age and salary) when prompted.
+
+The script will predict whether the customer will buy the product or not.
+
+Model Workflow
+
+Load the dataset.
+
+Preprocess data (feature scaling and train-test split).
+
+Train a logistic regression model.
+
+Predict customer purchase decisions.
+
+Evaluate the model accuracy using accuracy_score from Scikit-learn.
+
+Accuracy:
+
+The model is evaluated using test data and achieves an accuracy of approximately 80%.
+
+Future Improvements:
+
+Add more features to improve prediction accuracy.
+
+Implement hyperparameter tuning for better model performance.
+
+Use a graphical interface (GUI) for better user interaction.
+
+Author:
+
+Aakash

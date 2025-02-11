@@ -1,0 +1,59 @@
+#This is a Logistic regression model, trained to predict whether a customer will buy the product or not with 80% accuracy.
+#importing the libraries
+import pandas as pd
+import numpy as np
+#Reading the dataset
+df = pd.read_csv("sales_dataset.csv")
+#Displaying the no. of rows and columns
+print(df.shape)
+#Displaying the first 5 rows
+print(df.head(5))
+#Displaying the last 5 rows
+print(df.tail(5))
+#Segregating dataset, where x is input and y is output
+#iloc - means integer location
+x = df.iloc[:, :-1].values
+print(x)
+y = df.iloc[:, -1]
+print(y)
+#Feature Scaling
+#X - TRAIN = 80% INPUT DATA
+#Y - TRAIN = 80% OUTPUT DATA
+#X - TEST = 20% INPUT DATA
+#Y - TEST = 20% OUPTUT DATA
+from sklearn.model_selection import train_test_split
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.25, random_state = 0)
+#Now the next step in feature scaling si that we use standardscaler package/library to make all the features contribute equality to the result
+#Fit_Transform - this method is used to calculate the mean and variance of each of the features present in the df
+#Transform - used to transform the features using the mean and variance
+#Tranforming equally
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+x_train = sc.fit_transform(x_train)
+x_test = sc.transform(x_test)
+print(x_train)
+print(x_test)
+#Now this is thew important step, i.e, training the model
+#for this model to predict the result, we use logistic regression from sklearn
+from sklearn.linear_model import LogisticRegression
+model = LogisticRegression() 
+model.fit(x_train, y_train)
+#Predicting whether new customer with age and salary will buy or not
+age = int(input("Enter New Customer Age: "))
+sal = int(input("Enter new customer salary: "))
+newCust = [[age,sal]]
+result = model.predict(sc.transform(newCust))
+print(result)
+if result == 1:
+    print("Customer will buy")
+else:
+    print("Customer will not buy")
+#Prdicting the result from the model for all test data
+y_pred =model.predict(x_test)
+y_pred = np.array(y_pred)  # Convert y_pred to NumPy array if not already
+y_test = np.array(y_test)
+print(np.concatenate((y_pred.reshape(len(y_pred),1),y_test.reshape(len(y_test),1)),1))
+#Checking the accuracy using accuracy_score package from sklearn.metrics package
+#model evaution
+from sklearn.metrics import accuracy_score
+print("Accuracy of the model: {0}%".format(accuracy_score(y_test,y_pred)*100))
